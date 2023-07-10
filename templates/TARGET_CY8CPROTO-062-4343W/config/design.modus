@@ -115,6 +115,34 @@
                 <Block location="ioss[0].port[12].pin[5]">
                     <Alias value="CYBSP_SDHC_CLK"/>
                 </Block>
+                <Block location="ioss[0].port[12].pin[6]">
+                    <Personality template="pin" version="3.0">
+                        <Param id="DriveModes" value="CY_GPIO_DM_ANALOG"/>
+                        <Param id="initialState" value="1"/>
+                        <Param id="nonSec" value="1"/>
+                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
+                        <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
+                        <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
+                        <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
+                        <Param id="sioOutputBuffer" value="true"/>
+                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
+                        <Param id="inFlash" value="true"/>
+                    </Personality>
+                </Block>
+                <Block location="ioss[0].port[12].pin[7]">
+                    <Personality template="pin" version="3.0">
+                        <Param id="DriveModes" value="CY_GPIO_DM_ANALOG"/>
+                        <Param id="initialState" value="1"/>
+                        <Param id="nonSec" value="1"/>
+                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
+                        <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
+                        <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
+                        <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
+                        <Param id="sioOutputBuffer" value="true"/>
+                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
+                        <Param id="inFlash" value="true"/>
+                    </Personality>
+                </Block>
                 <Block location="ioss[0].port[13].pin[0]">
                     <Alias value="CYBSP_SDHC_IO0"/>
                 </Block>
@@ -454,7 +482,7 @@
                 </Block>
                 <Block location="peri[0].div_16[0]">
                     <Personality template="pclk" version="3.0">
-                        <Param id="intDivider" value="1000"/>
+                        <Param id="intDivider" value="960"/>
                         <Param id="fracDivider" value="0"/>
                         <Param id="startOnReset" value="true"/>
                     </Personality>
@@ -475,12 +503,30 @@
                         <Param id="startOnReset" value="true"/>
                     </Personality>
                 </Block>
+                <Block location="peri[0].div_8[7]">
+                    <Alias value="CYBSP_TRACE_CLK_DIV"/>
+                    <Personality template="pclk" version="3.0">
+                        <Param id="intDivider" value="1"/>
+                        <Param id="fracDivider" value="0"/>
+                        <Param id="startOnReset" value="true"/>
+                    </Personality>
+                </Block>
                 <Block location="srss[0].clock[0]">
                     <Personality template="sysclocks" version="3.0"/>
                 </Block>
                 <Block location="srss[0].clock[0].bakclk[0]">
                     <Personality template="bakclk" version="3.0">
                         <Param id="sourceClock" value="wco"/>
+                    </Personality>
+                </Block>
+                <Block location="srss[0].clock[0].eco[0]">
+                    <Personality template="eco" version="3.0">
+                        <Param id="ecoFrequency" value="34.4064"/>
+                        <Param id="accuracyPpm" value="0"/>
+                        <Param id="driveLevel" value="1000"/>
+                        <Param id="esr" value="50"/>
+                        <Param id="c0" value="0"/>
+                        <Param id="cLoad" value="18"/>
                     </Personality>
                 </Block>
                 <Block location="srss[0].clock[0].fastclk[0]">
@@ -494,6 +540,7 @@
                     <Personality template="fll" version="4.0">
                         <Param id="configuration" value="auto"/>
                         <Param id="desiredFrequency" value="100.000"/>
+                        <Param id="enableOutputDivider" value="false"/>
                     </Personality>
                 </Block>
                 <Block location="srss[0].clock[0].hfclk[0]">
@@ -504,20 +551,20 @@
                 </Block>
                 <Block location="srss[0].clock[0].hfclk[1]">
                     <Personality template="hfclk" version="3.0">
-                        <Param id="sourceClockNumber" value="2"/>
+                        <Param id="sourceClockNumber" value="1"/>
                         <Param id="divider" value="1"/>
                     </Personality>
                 </Block>
                 <Block location="srss[0].clock[0].hfclk[2]">
                     <Personality template="hfclk" version="3.0">
-                        <Param id="sourceClockNumber" value="2"/>
-                        <Param id="divider" value="1"/>
+                        <Param id="sourceClockNumber" value="0"/>
+                        <Param id="divider" value="2"/>
                     </Personality>
                 </Block>
                 <Block location="srss[0].clock[0].hfclk[3]">
                     <Personality template="hfclk" version="3.0">
-                        <Param id="sourceClockNumber" value="1"/>
-                        <Param id="divider" value="1"/>
+                        <Param id="sourceClockNumber" value="2"/>
+                        <Param id="divider" value="2"/>
                     </Personality>
                 </Block>
                 <Block location="srss[0].clock[0].ilo[0]">
@@ -542,7 +589,7 @@
                 </Block>
                 <Block location="srss[0].clock[0].pathmux[1]">
                     <Personality template="pathmux" version="3.0">
-                        <Param id="sourceClock" value="imo"/>
+                        <Param id="sourceClock" value="eco"/>
                     </Personality>
                 </Block>
                 <Block location="srss[0].clock[0].pathmux[2]">
@@ -574,7 +621,7 @@
                     <Personality template="pll" version="3.0">
                         <Param id="lowFrequencyMode" value="false"/>
                         <Param id="configuration" value="auto"/>
-                        <Param id="desiredFrequency" value="48.000"/>
+                        <Param id="desiredFrequency" value="22.579"/>
                         <Param id="optimization" value="MinPower"/>
                     </Personality>
                 </Block>
@@ -582,7 +629,7 @@
                     <Personality template="pll" version="3.0">
                         <Param id="lowFrequencyMode" value="false"/>
                         <Param id="configuration" value="auto"/>
-                        <Param id="desiredFrequency" value="100.000"/>
+                        <Param id="desiredFrequency" value="96.000"/>
                         <Param id="optimization" value="MinPower"/>
                     </Personality>
                 </Block>
@@ -628,7 +675,7 @@
             <Netlist>
                 <Net>
                     <Port name="cpuss[0].dap[0].clock_trace_in[0]"/>
-                    <Port name="peri[0].div_16[15].clk[0]"/>
+                    <Port name="peri[0].div_8[7].clk[0]"/>
                 </Net>
                 <Net>
                     <Port name="cpuss[0].dap[0].swj_swclk_tclk[0]"/>
@@ -653,6 +700,14 @@
                 <Net>
                     <Port name="ioss[0].port[0].pin[1].analog[0]"/>
                     <Port name="srss[0].clock[0].wco[0].wco_out[0]"/>
+                </Net>
+                <Net>
+                    <Port name="ioss[0].port[12].pin[6].analog[0]"/>
+                    <Port name="srss[0].clock[0].eco[0].eco_in[0]"/>
+                </Net>
+                <Net>
+                    <Port name="ioss[0].port[12].pin[7].analog[0]"/>
+                    <Port name="srss[0].clock[0].eco[0].eco_out[0]"/>
                 </Net>
                 <Net>
                     <Port name="ioss[0].port[14].pin[0].aux[0]"/>

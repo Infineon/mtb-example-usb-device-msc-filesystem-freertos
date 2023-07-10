@@ -7,7 +7,7 @@
 * Note         : See README.md
 *
 ******************************************************************************
-* Copyright 2022, Cypress Semiconductor Corporation (an Infineon company) or
+* Copyright 2022-2023, Cypress Semiconductor Corporation (an Infineon company) or
 * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
 *
 * This software, including source code, documentation and related
@@ -71,6 +71,8 @@
 /*****************************************************************************
 * Function prototypes
 *****************************************************************************/
+
+static void audio_in_pdm_pcm_handler(void *handler_arg, cyhal_pdm_pcm_event_t event);
 static void audio_in_button_handler(void *handler_arg, cyhal_gpio_event_t event);
 
 
@@ -233,8 +235,8 @@ void audio_in_task(void *arg)
                             pdm_pcm_cfg.decimation_rate = PDM_DECIMATION_RATE;
                             pdm_pcm_cfg.sample_rate = sample_rate;
                             pdm_pcm_cfg.word_length = 16;
-                            pdm_pcm_cfg.right_gain = 0;
-                            pdm_pcm_cfg.left_gain = 0;
+                            pdm_pcm_cfg.right_gain = CYHAL_PDM_PCM_MAX_GAIN;
+                            pdm_pcm_cfg.left_gain = CYHAL_PDM_PCM_MAX_GAIN;
 
                             cyhal_pdm_pcm_init(&pdm_pcm, CYBSP_PDM_DATA, CYBSP_PDM_CLK, NULL, &pdm_pcm_cfg);
                             cyhal_pdm_pcm_register_callback(&pdm_pcm, &audio_in_pdm_pcm_handler, NULL);

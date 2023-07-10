@@ -25,7 +25,7 @@
  *
  * https://www.FreeRTOS.org
  * https://github.com/FreeRTOS
- * http://www.cypress.com
+ * http://www.infineon.com
  *
  */
 
